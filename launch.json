@@ -1,0 +1,17 @@
+{
+  "kind": "evm_contracts",
+  "contracts": [
+    {
+      "contract": "HookListingRegistry",
+      "constructorArgs": []
+    },
+    {
+      "contract": "FeaturedPlacementsV2",
+      "constructorArgs": [
+        "$owner",
+        "$contract:HookListingRegistry"
+      ]
+    }
+  ],
+  "notes": "Deploys the immutable Hooks Store application contracts in dependency order, with no proxy or upgrade path. HookListingRegistry provides free, permissionless listings and has no registry administrator. FeaturedPlacementsV2 uses the explicit launch owner with two-step ownership and the deployed registry. Each #ad placement costs 100000000000000000 base units (0.1 IMD) for 24 hours, with at most one live placement per listing. Anyone may boost a live placement from their deposited balance. Cancellation refunds only the base price pro rata; all boosts and earned base proceeds accrue to the recipient pinned at purchase. Settlement credits the full base price and boosts to that recipient. Boosts remain escrowed until closure; accountedBalance equals totalAvailable + totalEscrowed + totalProceeds. rankOf and featured expose base plus boost totals for website sorting by total descending, then lower placement ID. After deployment on Robinhood Chain, the owner must call configureToken once with IMD at 0x5f7bb59365ce557c26dbcaa4ee9d39a4b95b7127 and setProceedsRecipient to the owner's own wallet. The token is not a constructor dependency. No token, pool or liquidity is created, no ETH is funded, and no payments or initialization calls occur at deployment. The same contracts and constructor references apply to the separate Ethereum launch; chain selection is external to this manifest."
+}
